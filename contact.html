@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Northbridge Accounting &amp; Consulting</title>
+  <meta name="description" content="Request a conversation with Northbridge Accounting &amp; Consulting about your organization's books and audit-readiness." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Primary">
+      <a class="brand" href="index.html" aria-label="Northbridge Accounting &amp; Consulting home">
+        <img class="brand-mark" src="images/nbac-emblem.png" alt="" width="46" height="46" />
+        <span class="brand-text">
+          <span class="b-name">Northbridge</span>
+          <span class="b-sub">Accounting &amp; Consulting</span>
+        </span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="standard.html">Our Standard</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a class="nav-cta" href="contact.html" aria-current="page">Request a conversation</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" style="padding-block:clamp(3.5rem,8vw,6rem) clamp(2rem,5vw,3rem);">
+      <div class="wrap">
+        <p class="eyebrow reveal">Contact</p>
+        <h1 class="reveal d1" style="max-width:18ch;">Let's start with where your books stand.</h1>
+        <p class="lead reveal d2" style="max-width:50ch;color:var(--muted);">
+          The first conversation is unhurried and without obligation — enough to understand the
+          organization, the funding, and whether Northbridge Accounting &amp; Consulting is the right fit.</p>
+      </div>
+    </section>
+
+    <section style="padding-top:0;">
+      <div class="wrap">
+        <div class="contact-grid">
+          <div class="reveal">
+            <div class="contact-detail">
+              <span class="label">Email</span>
+              <a href="mailto:hello@northbridgeaccounting.com">hello@northbridgeaccounting.com</a>
+            </div>
+            <div class="contact-detail">
+              <span class="label">Telephone</span>
+              <p>(000) 000-0000</p>
+            </div>
+            <div class="contact-detail">
+              <span class="label">Engagements &amp; billing</span>
+              <p style="font-size:1rem;color:var(--muted);max-width:38ch;">Scope and fee are agreed in
+                writing before work begins. Invoicing is handled directly; no online payment is required
+                to begin a conversation.</p>
+            </div>
+          </div>
+
+          <!-- This form composes an email in your default mail app — no server needed.
+               To route submissions to an inbox instead, see README (Formspree, 2 lines). -->
+          <form id="contact-form" class="reveal d1" novalidate>
+            <div class="field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="org">Organization</label>
+              <input type="text" id="org" name="org" autocomplete="organization" />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="message">How can we help?</label>
+              <textarea id="message" name="message" rows="5"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send message <span class="arrow">&rarr;</span></button>
+            <p id="form-note" style="font-size:0.9rem;color:var(--muted);margin-top:1rem;"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-brand">
+        <span class="footer-lockup"><img class="footer-mark" src="images/nbac-emblem.png" alt="" width="38" height="38" /><span class="b-name">Northbridge Accounting &amp; Consulting</span></span>
+        <p style="margin-top:1rem;max-width:34ch;">Accounting and audit-readiness for tribal and
+          federally funded organizations.</p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <a href="index.html">Overview</a>
+        <a href="services.html">Services</a>
+        <a href="standard.html">Our Standard</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <a href="mailto:hello@northbridgeaccounting.com">hello@northbridgeaccounting.com</a>
+        <a href="tel:+10000000000">(000) 000-0000</a>
+      </div>
+      <div class="footer-fine" style="grid-column:1 / -1;">
+        &copy; <span id="year"></span> Northbridge Accounting &amp; Consulting. Adele Royal, former KPMG auditor. Northbridge Accounting &amp; Consulting provides accounting and audit-readiness services only; it does
+        not perform attestation services or the Single Audit.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const t = document.querySelector('.nav-toggle'), l = document.getElementById('nav-links');
+    t && t.addEventListener('click', () => { const o = l.classList.toggle('open'); t.setAttribute('aria-expanded', o); });
+
+    // Zero-backend contact: compose an email in the visitor's mail client.
+    var TO = 'hello@northbridgeaccounting.com';
+    document.getElementById('contact-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = (document.getElementById('name').value || '').trim();
+      var org  = (document.getElementById('org').value || '').trim();
+      var from = (document.getElementById('email').value || '').trim();
+      var msg  = (document.getElementById('message').value || '').trim();
+      if (!name || !from) {
+        document.getElementById('form-note').textContent = 'Please add your name and email.';
+        return;
+      }
+      var body = 'Name: ' + name + '\nOrganization: ' + org + '\nEmail: ' + from + '\n\n' + msg;
+      window.location.href = 'mailto:' + TO + '?subject=' +
+        encodeURIComponent('Inquiry from ' + name) + '&body=' + encodeURIComponent(body);
+      document.getElementById('form-note').textContent = 'Opening your email app…';
+    });
+  </script>
+</body>
+</html>

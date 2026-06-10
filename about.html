@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Adele Royal | Northbridge Accounting &amp; Consulting</title>
+  <meta name="description" content="Adele Royal — former KPMG auditor with 15+ years in federally funded and Alaska Native organization accounting." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Primary">
+      <a class="brand" href="index.html" aria-label="Northbridge Accounting &amp; Consulting home">
+        <img class="brand-mark" src="images/nbac-emblem.png" alt="" width="46" height="46" />
+        <span class="brand-text">
+          <span class="b-name">Northbridge</span>
+          <span class="b-sub">Accounting &amp; Consulting</span>
+        </span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="standard.html">Our Standard</a></li>
+        <li><a href="about.html" aria-current="page">About</a></li>
+        <li><a class="nav-cta" href="contact.html">Request a conversation</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" style="padding-block:clamp(3.5rem,8vw,6rem) clamp(1.5rem,4vw,3rem);">
+      <div class="wrap">
+        <p class="eyebrow reveal">About</p>
+        <h1 class="reveal d1" style="max-width:18ch;">The auditor's standard, on your side of the table.</h1>
+      </div>
+    </section>
+
+    <section style="padding-top:0;">
+      <div class="wrap">
+        <div class="about-grid">
+          <!-- Adele's headshot. If the file is ever missing, the navy panel with her
+               initials shows in its place, so nothing looks broken. -->
+          <figure class="portrait reveal">
+            <span class="monogram">AR</span>
+            <img src="images/adele-royal.png" alt="Adele Royal, Northbridge Accounting &amp; Consulting"
+                 onerror="this.style.display='none'" />
+            <figcaption>Adele Royal &mdash; Principal</figcaption>
+          </figure>
+
+          <div class="reveal d1">
+            <p class="lead" style="color:var(--ink);">Adele Royal spent her career on the audit side of
+              federally funded organizations. Northbridge Accounting &amp; Consulting exists to put that experience to work
+              before the audit — keeping the books the way she once expected to receive them.</p>
+
+            <p>Adele began as an auditor at KPMG, where she audited Alaska Native Corporations and the
+              complex, federally funded entities that operate within them. She went on to hold controller
+              roles at Doyon, Limited; Gana-a'yoo, Limited; Doyon Drilling; and Alaska Aerospace —
+              organizations where fund accounting, grant compliance, and audit scrutiny are routine, not
+              exceptional.</p>
+
+            <p>That combination — auditor's eye, controller's hands — is the whole point of Northbridge
+              Accounting &amp; Consulting. The work is prepared by someone who knows exactly what an independent reviewer
+              will look for, and builds the record to meet it.</p>
+
+            <p>Northbridge Accounting &amp; Consulting provides accounting and audit-readiness only;
+              attestation and the Single Audit remain with independent licensed firms — a separation
+              kept by principle.</p>
+
+            <ul class="cred-list">
+              <li><span>Former</span> Auditor, KPMG &mdash; Alaska Native Corporations</li>
+              <li><span>Controller</span> Doyon, Limited &middot; Gana-a'yoo, Limited &middot; Doyon Drilling &middot; Alaska Aerospace</li>
+              <li><span>Experience</span> 15+ years in federally funded &amp; fund accounting</li>
+              <li><span>Connect</span> <a href="https://www.linkedin.com/in/REPLACE-WITH-ADELE-PROFILE" target="_blank" rel="noopener">Adele on LinkedIn &rarr;</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="wrap" style="text-align:center;">
+        <p class="eyebrow" style="justify-content:center;">How she works</p>
+        <h2 style="max-width:24ch;margin-inline:auto;">Calm, exact, and accountable to the record.</h2>
+        <p style="max-width:54ch;margin:1.4rem auto 2rem;">No theatrics, no overreach. Books kept current,
+          questions answered before they are asked, and a clear line between the work she does and the
+          audit she will never sign.</p>
+        <a class="btn btn-ghost" style="border-color:#E8A877;color:#fff;" href="contact.html">Request a conversation</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-brand">
+        <span class="footer-lockup"><img class="footer-mark" src="images/nbac-emblem.png" alt="" width="38" height="38" /><span class="b-name">Northbridge Accounting &amp; Consulting</span></span>
+        <p style="margin-top:1rem;max-width:34ch;">Accounting and audit-readiness for tribal and
+          federally funded organizations.</p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <a href="index.html">Overview</a>
+        <a href="services.html">Services</a>
+        <a href="standard.html">Our Standard</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <a href="mailto:hello@northbridgeaccounting.com">hello@northbridgeaccounting.com</a>
+        <a href="tel:+10000000000">(000) 000-0000</a>
+      </div>
+      <div class="footer-fine" style="grid-column:1 / -1;">
+        &copy; <span id="year"></span> Northbridge Accounting &amp; Consulting. Adele Royal, former KPMG auditor. Northbridge Accounting &amp; Consulting provides accounting and audit-readiness services only; it does
+        not perform attestation services or the Single Audit.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const t = document.querySelector('.nav-toggle'), l = document.getElementById('nav-links');
+    t && t.addEventListener('click', () => { const o = l.classList.toggle('open'); t.setAttribute('aria-expanded', o); });
+  </script>
+</body>
+</html>
