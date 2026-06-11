@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact — Northbridge Accounting &amp; Consulting</title>
-  <meta name="description" content="Request a conversation with Northbridge Accounting &amp; Consulting about your organization's books and audit-readiness." />
+  <meta name="description" content="Book a call or send a message to Northbridge Accounting &amp; Consulting about your organization's books and audit-readiness." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -39,8 +39,24 @@
       </div>
     </section>
 
+    <!-- ===== BOOK A CALL (Calendly, navy) ===== -->
     <section>
       <div class="wrap">
+        <p class="eyebrow">Book a call</p>
+        <h2 style="margin-bottom:0.5rem;">Choose a time that works for you.</h2>
+        <p style="color:var(--muted);max-width:52ch;margin-bottom:2rem;">A 30-minute introductory call to
+          discuss your organization's accounting and audit-readiness needs. Calls are held on Fridays.</p>
+        <div class="calendly-inline-widget"
+             data-url="https://calendly.com/adele-royal/introductory-call?hide_gdpr_banner=1&amp;primary_color=1f2c5c"
+             style="min-width:320px;height:700px;"></div>
+      </div>
+    </section>
+
+    <!-- ===== OR SEND A MESSAGE ===== -->
+    <section class="qualifier" style="border-top:1px solid var(--rule);">
+      <div class="wrap">
+        <p class="eyebrow">Or send a message</p>
+        <h2 style="margin-bottom:1.6rem;">Prefer to write first?</h2>
         <div class="contact-grid">
           <div class="reveal">
             <div class="contact-detail">
@@ -59,16 +75,16 @@
             </div>
           </div>
 
-          <!-- This form composes an email in your default mail app — no server needed.
-               To route submissions to an inbox instead, see README (Formspree, 2 lines). -->
-          <form id="contact-form" class="reveal d1" novalidate>
+          <!-- Delivers to Adele's inbox via Formspree; visitor stays on the page. -->
+          <form id="contact-form" class="reveal d1"
+                action="https://formspree.io/f/xjgdewge" method="POST" novalidate>
             <div class="field">
               <label for="name">Name</label>
               <input type="text" id="name" name="name" autocomplete="name" required />
             </div>
             <div class="field">
               <label for="org">Organization</label>
-              <input type="text" id="org" name="org" autocomplete="organization" />
+              <input type="text" id="org" name="organization" autocomplete="organization" />
             </div>
             <div class="field">
               <label for="email">Email</label>
@@ -78,8 +94,9 @@
               <label for="message">How can we help?</label>
               <textarea id="message" name="message" rows="5"></textarea>
             </div>
+            <input type="hidden" name="_subject" value="New inquiry from northbridge-accounting.com" />
             <button type="submit" class="btn btn-primary">Send message <span class="arrow">&rarr;</span></button>
-            <p id="form-note" style="font-size:0.9rem;color:var(--muted);margin-top:1rem;"></p>
+            <p id="form-note" style="font-size:0.9rem;color:var(--muted);margin-top:1rem;" role="status" aria-live="polite"></p>
           </form>
         </div>
       </div>
@@ -107,33 +124,50 @@
         <a href="tel:+19072270038">(907) 227-0038</a>
       </div>
       <div class="footer-fine" style="grid-column:1 / -1;">
-        &copy; <span id="year"></span> Northbridge Accounting &amp; Consulting. Adele Royal, former KPMG auditor. Northbridge Accounting &amp; Consulting provides accounting and audit-readiness services only; it does
-        not perform attestation services or the Single Audit.
+        &copy; <span id="year"></span> Northbridge Accounting &amp; Consulting. Adele Royal, former KPMG auditor. Northbridge Accounting &amp; Consulting provides accounting and audit-readiness services only; it does not perform attestation services or the Single Audit.
       </div>
     </div>
   </footer>
+
+  <!-- Calendly inline embed -->
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
     const t = document.querySelector('.nav-toggle'), l = document.getElementById('nav-links');
     t && t.addEventListener('click', () => { const o = l.classList.toggle('open'); t.setAttribute('aria-expanded', o); });
 
-    // Zero-backend contact: compose an email in the visitor's mail client.
-    var TO = 'Adele.royal@outlook.com';
-    document.getElementById('contact-form').addEventListener('submit', function (e) {
+    // Formspree submit via AJAX so the visitor stays on the page.
+    var form = document.getElementById('contact-form');
+    var note = document.getElementById('form-note');
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
       var name = (document.getElementById('name').value || '').trim();
-      var org  = (document.getElementById('org').value || '').trim();
       var from = (document.getElementById('email').value || '').trim();
-      var msg  = (document.getElementById('message').value || '').trim();
       if (!name || !from) {
-        document.getElementById('form-note').textContent = 'Please add your name and email.';
+        note.style.color = '#C5602B';
+        note.textContent = 'Please add your name and email.';
         return;
       }
-      var body = 'Name: ' + name + '\nOrganization: ' + org + '\nEmail: ' + from + '\n\n' + msg;
-      window.location.href = 'mailto:' + TO + '?subject=' +
-        encodeURIComponent('Inquiry from ' + name) + '&body=' + encodeURIComponent(body);
-      document.getElementById('form-note').textContent = 'Opening your email app…';
+      note.style.color = 'var(--muted)';
+      note.textContent = 'Sending…';
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(function (r) {
+        if (r.ok) {
+          form.reset();
+          note.style.color = '#2F7F40';
+          note.textContent = 'Thank you — your message has been sent. Adele will be in touch.';
+        } else {
+          note.style.color = '#C5602B';
+          note.textContent = 'Something went wrong. Please email Adele.royal@outlook.com directly.';
+        }
+      }).catch(function () {
+        note.style.color = '#C5602B';
+        note.textContent = 'Something went wrong. Please email Adele.royal@outlook.com directly.';
+      });
     });
   </script>
 </body>
